@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Prueba DaisyUI + Flowbite</title>
+
+  <!-- CSS de Tailwind + DaisyUI -->
+  <link href="{% static 'dist/output.css' %}" rel="stylesheet">
+
+  <!-- JS de Flowbite -->
+  <script src="{% static 'js/flowbite.js' %}" defer></script>
+</head>
+<body class="bg-base-200 min-h-screen p-10">
+
+  <!-- ✅ Botón de DaisyUI -->
+  <button class="btn btn-primary mb-4">
+    Botón DaisyUI
+  </button>
+
+  <br>
+
+  <!-- ✅ Botón de Flowbite -->
+  <button data-modal-toggle="modalTest"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+    Botón Flowbite
+  </button>
+
+  <!-- ✅ Modal Flowbite -->
+  <div id="modalTest" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center">
+    <div class="bg-white rounded-lg p-6 w-80">
+      <h2 class="text-lg font-bold mb-4">Flowbite funciona ✅</h2>
+      <button data-modal-hide="modalTest"
+              class="bg-red-500 text-white px-4 py-2 rounded">
+        Cerrar
+      </button>
+    </div>
+  </div>
+
+</body>
+
+</html>

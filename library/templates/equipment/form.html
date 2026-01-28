@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load form_tag %}
+{% load static %}
+
+{% block title %}
+Libro
+{% endblock %}
+
+{% block content %}
+
+<style>
+input, select, textarea {
+    width: 100%;
+    padding: 0.6rem 0.9rem;
+    border-radius: 0.5rem;
+    border: 1px solid #d1d5db;
+    background-color: #f9fafb;
+    font-size: 0.95rem;
+    transition: all 0.2s ease-in-out;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+input:hover, select:hover, textarea:hover {
+    border-color: #3b82f6;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #9ca3af;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    width: 1rem;
+    height: 1rem;
+    accent-color: #2563eb;
+}
+
+ul.errorlist li {
+    color: #ef4444;
+    font-size: 0.8rem;
+    margin-top: 4px;
+}
+</style>
+
+<div class="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10">
+    <div class="w-full max-w-5xl bg-white rounded-xl shadow-lg p-8">
+        <h2 class="text-3xl font-bold text-center text-blue-700 mb-8">
+            Registro de Equipo
+        </h2>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="bg-gray-50 p-6 rounded-lg border mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {% for field in form_type %}
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">
+                                {{ field.label }}
+                            </label>
+                            {{ field }}
+                            {{ field.errors }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg border">
+                <h3 class="text-lg font-semibold text-gray-700 mb-4">
+                    Información del libro
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                    {% for field in form %}
+                        {% if field.name != "imagen" %}
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-600 mb-1">
+                                    {{ field.label }}
+                                </label>
+                                {{ field }}
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+                <div class="mt-6">
+                    {% for field in form %}
+                        {% if field.name == "imagen" %}
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                {{ field.label }}
+                            </label>
+
+                            <div class="border-2 border-dashed border-blue-400 p-6 rounded-lg bg-white text-center">
+                                {{ field }}
+                            </div>
+
+                            {{ field.errors }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="flex justify-between items-center pt-8">
+                <button type="button"
+                        onclick="window.history.back();"
+                        class="px-6 py-3 bg-gray-300 text-gray-800 rounded-lg font-semibold hover:bg-gray-400 transition">
+                    Cancelar
+                </button>
+                <button type="submit"
+                        class="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition shadow">
+                    Guardar Equipo
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

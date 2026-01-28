@@ -1,0 +1,45 @@
+<header class="text-sm text-white w-full">
+    <nav class="relative h-[70px] text-align font-bold flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 bg-white text-blue-900 transition-all shadow rounded-b-full">
+        <ul class="hidden md:flex text-lg text-align space-x-8 md:pl-90">
+            <li><a href="{% url 'library:library_record' %}"><i class="fa fa-book"></i> Libro</a></li>
+            <li><a href="{% url 'library:movie_record' %}"><i class="fa fa-film"></i> Películas</a></li>
+            <li><a href="{% url 'library:multimedia_record' %}"><i class="fa fa-file-text"></i> Multimedia</a></li>
+            <li><a href="{% url 'library:equipment_record' %}"><i class="fa fa-laptop"></i> Equipos</a></li>
+            <li><a href="{% url 'library:area_record' %}"><i class="fa fa-plus-circle"></i> Áreas</a></li>
+        </ul>
+        
+    <a href="{% url 'account:sign_in' %}">
+        <button class="md:inline hidden bg-white text-neutral-900 hover:bg-gray-50 border border-gray-300 ml-20 px-9 py-2 rounded-full active:scale-95 transition-all">
+        Iniciar Sesión
+        </button>
+        </a>
+
+        <button aria-label="menu-btn" type="button" class="menu-btn inline-block md:hidden active:scale-90 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+                <path d="M3 7a1 1 0 1 0 0 2h24a1 1 0 1 0 0-2zm0 7a1 1 0 1 0 0 2h24a1 1 0 1 0 0-2zm0 7a1 1 0 1 0 0 2h24a1 1 0 1 0 0-2z"/>
+            </svg>
+        </button>
+
+        <div class="mobile-menu absolute top-[70px] left-0 w-full bg-white-900 shadow-sm p-6 hidden md:hidden">
+            <ul class="flex flex-col space-y-4 text-lg">
+                <li><a href="{% url 'library:library_record' %}" class="text-sm">Libro</a></li>
+                <li><a href="{% url 'library:movie_record' %}" class="text-sm">Películas</a></li>
+                <li><a href="{% url 'library:multimedia_record' %}" class="text-sm">Multimedia</a></li>
+                <li><a href="{% url 'library:equipment_record' %}" class="text-sm">Equipos</a></li>
+                <li><a href="{% url 'library:area_record' %}" class="text-sm">Áreas</a></li>
+
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<script>
+    const menuButtons = document.querySelectorAll('.menu-btn');
+    const mobileMenus = document.querySelectorAll('.mobile-menu');
+
+    menuButtons.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            mobileMenus[index].classList.toggle('hidden');
+        });
+    });
+</script>

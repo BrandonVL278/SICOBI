@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load form_tag %}
+{% load static %}
+
+{% block title %}
+Multimedias
+{% endblock %}
+
+{% block content %}
+{{ form_type.as_p }}
+{{ form.as_p }}
+{% endblock %}
