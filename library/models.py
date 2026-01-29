@@ -69,7 +69,7 @@ class Book(models.Model):
     pages = models.PositiveIntegerField(verbose_name='Número de páginas*')
     copies = models.PositiveIntegerField(verbose_name='Número de copias*')
     gender = models.CharField(verbose_name='Género Literario*', max_length=100, choices=GENDERS, default='comedy')
-    synopsis = models.CharField(verbose_name='Sinopsis')
+    synopsis = models.CharField(verbose_name='Sinopsis*', blank=True, null=True )
 #cambie textfield por charfield en synopsis 
     class Meta:
         verbose_name = 'Libro'
