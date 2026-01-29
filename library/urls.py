@@ -6,7 +6,7 @@ app_name = 'library'
 urlpatterns = [
     path('', views.index, name='index'),
     # book
-    path('', views.book_record, name='library_record'),
+    path('book/', views.book_record, name='library_record'),
     path('book/create/', views.book_form, name='book_create'),
     path('book/<int:id>/update/', views.book_form, name='book_update'),
     path('ajax/load-subareas/', views.load_subareas, name='ajax_load_subareas'),
