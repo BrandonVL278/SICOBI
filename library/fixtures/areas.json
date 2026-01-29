@@ -1,0 +1,23 @@
+[
+{
+  "model": "library.area",
+  "pk": 1,
+  "fields": {
+    "name": "Ciencias Econmicas y Administrativas"
+  }
+},
+{
+  "model": "library.area",
+  "pk": 2,
+  "fields": {
+    "name": "Ingenieras y Arquitectura"
+  }
+},
+{
+  "model": "library.area",
+  "pk": 3,
+  "fields": {
+    "name": "Ciencias Humanas y Sociales"
+  }
+}
+]

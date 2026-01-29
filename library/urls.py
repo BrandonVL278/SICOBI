@@ -4,6 +4,7 @@ from . import views
 app_name = 'library'
 
 urlpatterns = [
+    path('', views.index, name='index'),
     # book
     path('', views.book_record, name='library_record'),
     path('book/create/', views.book_form, name='book_create'),
