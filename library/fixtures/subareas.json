@@ -1,0 +1,114 @@
+[
+{
+  "model": "library.subarea",
+  "pk": 16,
+  "fields": {
+    "name": "Administraci�n de Empresas",
+    "area": 1
+  }
+},
+{
+  "model": "library.subarea",
+  "pk": 17,
+  "fields": {
+    "name": "Contadur�a Publica",
+    "area": 1
+  }
+},
+{
+  "model": "library.subarea",
+  "pk": 18,
+  "fields": {
+    "name": "Mercadotecnia",
+    "area": 1
+  }
+},
+{
+  "model": "library.subarea",
+  "pk": 19,
+  "fields": {
+    "name": "Derecho",
+    "area": 1
+  }
+},
+{
+  "model": "library.subarea",
+  "pk": 20,
+  "fields": {
+    "name": "Ciencias de la Comunicaci�n",
+    "area": 3
+  }
+},
+{
+  "model": "library.subarea",
+  "pk": 21,
+  "fields": {
+    "name": "Psicolog�a",
+    "area": 3
+  }
+},
+{
+  "model": "library.subarea",
+  "pk": 22,
+  "fields": {
+    "name": "Pedagog�a",
+    "area": 3
+  }
+},
+{
+  "model": "library.subarea",
+  "pk": 23,
+  "fields": {
+    "name": "Industrial y de Sistemas",
+    "area": 2
+  }
+},
+{
+  "model": "library.subarea",
+  "pk": 24,
+  "fields": {
+    "name": "Electr�nica y de Comunicaciones",
+    "area": 2
+  }
+},
+{
+  "model": "library.subarea",
+  "pk": 25,
+  "fields": {
+    "name": "Sistemas Computacionales",
+    "area": 2
+  }
+},
+{
+  "model": "library.subarea",
+  "pk": 26,
+  "fields": {
+    "name": "Mec�nica",
+    "area": 2
+  }
+},
+{
+  "model": "library.subarea",
+  "pk": 27,
+  "fields": {
+    "name": "Dise�o Grafico",
+    "area": 2
+  }
+},
+{
+  "model": "library.subarea",
+  "pk": 28,
+  "fields": {
+    "name": "Civil",
+    "area": 2
+  }
+},
+{
+  "model": "library.subarea",
+  "pk": 29,
+  "fields": {
+    "name": "Arquitectura",
+    "area": 2
+  }
+}
+]
