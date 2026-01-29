@@ -3,7 +3,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from library.models import Book, Movie, Multimedia, Equipment, Area, SubArea
 from library.forms import BookForm, MovieForm, MultimediaForm, EquipmentForm, AreaForm, SubAreaForm
-
+# Index
+def index(request):
+    return render(request, 'index.html')
 # Book
 def book_record(request):
 	books = Book.objects.all()

@@ -1,6 +1,7 @@
 <header class="text-sm text-white w-full">
     <nav class="relative h-[70px] text-align font-bold flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 bg-white text-blue-900 transition-all shadow rounded-b-full">
         <ul class="hidden md:flex text-lg text-align space-x-8 md:pl-90">
+            <li><a href="{% url 'library:index' %}"><i class="fa fa-home"></i>Index</a></li>
             <li><a href="{% url 'library:library_record' %}"><i class="fa fa-book"></i> Libro</a></li>
             <li><a href="{% url 'library:movie_record' %}"><i class="fa fa-film"></i> Películas</a></li>
             <li><a href="{% url 'library:multimedia_record' %}"><i class="fa fa-file-text"></i> Multimedia</a></li>
@@ -22,6 +23,7 @@
 
         <div class="mobile-menu absolute top-[70px] left-0 w-full bg-white-900 shadow-sm p-6 hidden md:hidden">
             <ul class="flex flex-col space-y-4 text-lg">
+                <li><a href="{% url 'library:index' %}"><i class="fa fa-home"></i>Index</a></li>
                 <li><a href="{% url 'library:library_record' %}" class="text-sm">Libro</a></li>
                 <li><a href="{% url 'library:movie_record' %}" class="text-sm">Películas</a></li>
                 <li><a href="{% url 'library:multimedia_record' %}" class="text-sm">Multimedia</a></li>

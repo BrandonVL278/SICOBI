@@ -19,7 +19,7 @@ def sign_in(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('library:library_record')
+            return redirect('library:index')
         else:
             form.errors.clear()
             form.add_error(None, 'Usuario o contraseña incorrectos')
