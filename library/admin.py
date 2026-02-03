@@ -1,7 +1,12 @@
 from django.contrib import admin
-from .models import Book, Item, Area, Loan, Equipment, Multimedia, SubArea
+from .models import Book, Item, Area, Loan, Equipment, Multimedia, SubArea, Author
 
 # Register your models here.
+
+@admin.register(Author)
+class AuthorAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):

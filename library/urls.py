@@ -11,6 +11,10 @@ urlpatterns = [
     path('book/<int:id>/update/', views.book_form, name='book_update'),
     path('ajax/load-subareas/', views.load_subareas, name='ajax_load_subareas'),
 
+    # author
+    path('book/create/author/', views.author_form, name='author_create'),
+    path('book/author/<int:id>/update/', views.author_form, name='author_update'),
+
     # movie
     path('movies/', views.movies_record, name='movie_record'),
     path('movie/create/', views.movie_form, name='movie_create'),

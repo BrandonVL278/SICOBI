@@ -1,8 +1,8 @@
 from urllib import request
 from django.shortcuts import render, get_object_or_404, redirect
 
-from library.models import Book, Movie, Multimedia, Equipment, Area, SubArea
-from library.forms import BookForm, MovieForm, MultimediaForm, EquipmentForm, AreaForm, SubAreaForm
+from library.models import Book, Movie, Multimedia, Equipment, Area, SubArea, Author
+from library.forms import BookForm, MovieForm, MultimediaForm, EquipmentForm, AreaForm, SubAreaForm, AuthorForm
 # Index
 def index(request):
     return render(request, 'index.html')
@@ -34,6 +34,23 @@ def load_subareas(request):
 	area_id = request.GET.get('area')
 	subareas = SubArea.objects.filter(area_id=area_id).order_by('name')
 	return render(request, 'book/subarea_dropdown_list_options.html', {'subareas': subareas})
+
+def author_form(request, id=None):
+	if id:
+		author = get_object_or_404(Author, id=id)
+		form = AuthorForm(request.POST or None, instance=author)
+	else:
+		form = AuthorForm(request.POST or None)
+
+	if request.method == 'POST' and form.is_valid():
+		author_obj = form.save(commit=False)
+		author_obj.save()
+		return redirect('library:book_create')
+	return render(request, 'book/author_form.html', {
+		'form':form,
+	})
+
+
 
 # Movie
 def movies_record(request):

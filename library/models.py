@@ -25,6 +25,15 @@ class SubArea(models.Model):
     def __str__(self):
         return self.name
 
+class Author(models.Model):
+    name = models.CharField(verbose_name='Nombre de autor', max_length=100)
+    class Meta:
+        verbose_name = 'Autor'
+        verbose_name_plural = 'Autores'
+
+    def __str__(self):
+        return self.name
+
 class Book(models.Model):
 
     GENDERS = [
@@ -53,13 +62,11 @@ class Book(models.Model):
 
     img = models.ImageField(verbose_name='Portada*', upload_to='book_covers/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'webp'])], null=True, blank=True)
     title = models.CharField(verbose_name='Titulo*', max_length=200)
-    author = models.CharField(verbose_name='Autor*', max_length=150)
-    author2 = models.CharField(verbose_name='Autor 2', max_length=150, blank=True, null=True, default=None)
-    author3 = models.CharField(verbose_name='Autor 3', max_length=150, blank=True, null=True, default=None)
+    author = models.ForeignKey(Author, verbose_name='Autor*',on_delete=models.CASCADE, related_name='books')
     clue = models.CharField(verbose_name='Clave*', max_length=20, unique=True)
     isbn = models.PositiveIntegerField(verbose_name='ISBN*', unique=True)
-    area = models.ForeignKey(Area, on_delete=models.CASCADE, related_name='books')
-    subarea = models.ForeignKey(SubArea, on_delete=models.CASCADE, related_name='books')
+    area = models.ForeignKey(Area, verbose_name='Área*', on_delete=models.CASCADE, related_name='books')
+    subarea = models.ForeignKey(SubArea, verbose_name='Subárea*', on_delete=models.CASCADE, related_name='books')
     editorial = models.CharField(verbose_name='Editorial*', max_length=150)
     edition = models.CharField(verbose_name='Edición', max_length=100, default='Primera edición')
     edition_date = models.DateField(verbose_name='Fecha de edición', blank=True, null=True, default=None)
@@ -74,6 +81,7 @@ class Book(models.Model):
     class Meta:
         verbose_name = 'Libro'
         verbose_name_plural = 'Libros'
+
 
 class Movie(models.Model):
     GENDERS = [
