@@ -32,11 +32,6 @@ class EquipmentForm(forms.ModelForm):
 	class Meta:
 		model = Equipment
 		fields = '__all__'
-		
-class ItemForm(forms.ModelForm):
-    class Meta:
-        model = Item
-        fields = ['obj_type', 'status', 'location', 'loan']
 
 class AreaForm(forms.ModelForm):
 	class Meta:

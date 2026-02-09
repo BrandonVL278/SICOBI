@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Book, Item, Area, Loan, Equipment, Multimedia, SubArea, Author
+from .models import Book, Area, Loan, Equipment, Multimedia, SubArea, Author
 
 # Register your models here.
 
@@ -25,14 +25,14 @@ class SubAreaAdmin(admin.ModelAdmin):
 
 @admin.register(Loan)
 class LoanAdmin(admin.ModelAdmin):
-    list_display = ('person_type', 'key', 'created_at', 'user')
+    list_display = ('person_type', 'person_key', 'item', 'created_at', 'user')
     search_fields = ('key', 'user')
 
 @admin.register(Equipment)
 class EquipmentAdmin(admin.ModelAdmin):
-    list_display = ('device_type', 'brand')
+    list_display = ('device_type', 'brand', 'key',)
     search_fields = ('device_type', 'brand')
 
 @admin.register(Multimedia)
 class MultimediaAdmin(admin.ModelAdmin):
-    list_display = ('gender',)
+    list_display = ('gender', 'multimedia_type', 'multimedia_format', 'title')

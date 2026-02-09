@@ -82,8 +82,17 @@ class Book(models.Model):
         verbose_name = 'Libro'
         verbose_name_plural = 'Libros'
 
-
 class Movie(models.Model):
+    title = models.CharField(verbose_name='Título', max_length=200)
+
+class Multimedia(models.Model):
+    MULTIMEDIA_TYPES = [
+        ('thesis', 'Tesis'),
+        ('audiobook', 'Audiolibro'),
+        ('movie', 'Película'), 
+        ('documentary', 'Documental'),
+        ('not specified', 'Sin especificar'),
+    ]
     GENDERS = [
         ('none', 'Sin especificar'),
         ('action', 'Acción'),
@@ -146,13 +155,22 @@ class Movie(models.Model):
         ('usb', 'USB'),
     ]
 
-
+    img = models.ImageField(verbose_name='Portada', upload_to='movie_covers/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'webp'])], null=True, blank=True) 
+    multimedia_type = models.CharField(verbose_name='Tipo de multimedia', choices=MULTIMEDIA_TYPES, default='not specified')
+    multimedia_format = models.CharField(verbose_name='Formato de multimedia', choices=FORMATS, default='dvd')
     gender = models.CharField(verbose_name='Género Cinematográfico', choices=GENDERS, default='none')
-    movie_format = models.CharField(verbose_name='Formato de película', choices=FORMATS, default='dvd')
+    key = models.CharField(verbose_name='Clave', max_length=20, unique=True)
+    title = models.CharField(verbose_name='Título', max_length=200)
+    actors = models.CharField(verbose_name='Actores', max_length=300, blank=True, null=True)
+    production_company = models.CharField(verbose_name='Compañía productora', max_length=150)
+    copies = models.PositiveIntegerField(verbose_name='Número de copias')
+    synthesis = models.CharField(verbose_name='Sinopsis', max_length=500)
+    income_date = models.DateTimeField(verbose_name='Fecha de ingreso', auto_now_add=True)
+
 
     class Meta:
-        verbose_name = 'Pelicula'
-        verbose_name_plural = 'Peliculas'
+        verbose_name = 'Multimedia'
+        verbose_name_plural = 'Multimedias'
 
 class Equipment(models.Model):
     DEVICE_TYPES = [
@@ -160,58 +178,31 @@ class Equipment(models.Model):
         ('desktop', 'Computadora de escritorio'),
         ('tablet', 'Tablet'),
         ('mobile', 'Dispositivo móvil'),
+        ('projector', 'Proyector'),
     ]
-
-    device_type = models.CharField(verbose_name='Tipo de dispositivo', choices=DEVICE_TYPES, max_length=30, default='laptop')
+    img = models.ImageField(verbose_name='Imagen del Equipo', upload_to='equipment_images/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'webp'])], null=True, blank=True)
+    key = models.CharField(verbose_name='Clave', max_length=20, unique=True)
+    name = models.CharField(verbose_name='Nombre del equipo', max_length=100)
     brand = models.CharField(verbose_name='Marca', max_length=100)
+    device_type = models.CharField(verbose_name='Tipo de dispositivo', choices=DEVICE_TYPES, max_length=30, default='laptop')
+    details = models.CharField(verbose_name='Detalles', max_length=300)
+    income_date = models.DateField(verbose_name='Fecha de ingreso', auto_now_add=True)
 
     class Meta:
         verbose_name = 'Equipo'
         verbose_name_plural = 'Equipos'
 
-class Multimedia(models.Model):
-    FORMATS = [
-        ('cd', 'CD'),
-        ('dvd', 'DVD'),
-        ('usb', 'USB'),
-    ]
-
-    multimedia_format = models.CharField(verbose_name='Formato multimedia', choices=FORMATS, default='usb', max_length=5)
-    publication_date = models.DateField(verbose_name='Fecha de publiación')
-    producer = models.CharField(verbose_name='Productor', max_length=100)
-    gender = models.CharField(verbose_name='Género', max_length=100)
-    sinopsis = models.TextField(verbose_name='Sinopsis')
-
-    class Meta:
-        verbose_name = 'Media'
-        verbose_name_plural = 'Medias'
-
 class Loan(models.Model):
     TYPES = [
         ('student', 'Alumno'),
         ('teacher', 'Docente'),
+        ('staff', 'Personal administrativo'),
     ]
 
+    
     person_type = models.CharField(verbose_name='Tipo de persona', choices=TYPES, max_length=10, default='student')
-    key = models.CharField(verbose_name='Mátricula', max_length=18)
+    person_key = models.CharField(verbose_name='Mátricula', max_length=18)
+    item = models.CharField(verbose_name='Ítem prestado', max_length=100)
+    estimated_return_date = models.DateField(verbose_name='Fecha estimada de devolución')
     created_at = models.DateTimeField(verbose_name='Creado el: ', auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-class Item(models.Model):
-    TYPES = [
-        ('book', 'Libro'),
-        ('equipment', 'Equipo'),
-        ('multimedia', 'Multimedia'),
-        ('movie', 'Película'),
-    ]
-
-    STATUS = [
-        ('available', 'Disponible'),
-        ('loaned', 'Prestado'),
-        ('lost', 'Perdido'),
-    ]
-
-    obj_type = models.CharField(verbose_name='Tipo de objeto', choices=TYPES, max_length=10, blank=False, null=False)
-    status = models.CharField(verbose_name='Estado', choices=STATUS, max_length=20, default='available')
-    location = models.CharField(verbose_name='Ubicación', max_length=100)
-    loan = models.ForeignKey(Loan, on_delete=models.CASCADE, blank=True, null=True)
