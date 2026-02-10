@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load form_tag %}
+{% load static %}
+
+{% block title %}Usuarios{% endblock %}
+
+{% block content %}
+
+<style>
+input, select, textarea {
+    width: 100%;
+    padding: 0.6rem 0.9rem;
+    border-radius: 0.5rem;
+    border: 1px solid #d1d5db;
+    background-color: #f9fafb;
+    font-size: 0.95rem;
+    transition: all 0.2s ease-in-out;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+input:hover, select:hover, textarea:hover {
+    border-color: #3b82f6;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #9ca3af;
+}
+
+ul.errorlist li {
+    color: #ef4444;
+    font-size: 0.8rem;
+    margin-top: 4px;
+}
+</style>
+
+<div class="min-h-screen bg-gray-100 px-4 py-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 space-y-8">
+
+        <!-- TÍTULO -->
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+            <h2 class="text-3xl font-bold text-blue-700">
+                Usuarios
+            </h2>
+
+            <a href="{% url 'library:area_create' %}"
+               class="px-5 py-2 bg-blue-700 text-white rounded-md text-sm font-semibold hover:bg-blue-800 transition">
+                + Crear Usuario
+            </a>
+        </div>
+
+        <!-- LISTADO -->
+        <div class="bg-gray-50 rounded-lg border divide-y">
+
+            {% for user in user %}
+            <div class="flex justify-between items-center p-4 hover:bg-gray-100 transition">
+                <p class="text-gray-800 font-medium">
+                    {{ user.username }}
+                </p>
+
+                <div class="flex gap-4">
+                    <a href="#"
+                       class="text-sm text-orange-600 font-semibold hover:underline">
+                        Editar
+                    </a>
+
+                    <a href="#"
+                       class="text-sm text-blue-600 font-semibold hover:underline">
+                        Ver detalles
+                    </a>
+
+                    <a href="#"
+                       class="text-sm text-red-600 font-semibold hover:underline">
+                        Eliminar
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="p-6 text-center text-gray-500">
+                No hay usuarios registrados.
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

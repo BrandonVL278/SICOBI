@@ -1,6 +1,8 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
+from .models import User
+from django.contrib.auth.decorators import login_required
 
 
 def sign_in(request):
@@ -29,3 +31,13 @@ def sign_in(request):
 def sign_out(request):
 	logout(request)
 	return redirect('account:sign_in')
+
+@login_required
+def user_profile(request):
+    user = request.user
+    return render(request)
+
+@login_required
+def user_record(request):
+    user = User.objects.all()
+    return render(request, 'user/record.html', {'user': user})

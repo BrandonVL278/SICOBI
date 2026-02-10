@@ -8,7 +8,14 @@
             <li><a href="{% url 'library:equipment_record' %}"><i class="fa fa-laptop"></i> Equipos</a></li>
             <li><a href="{% url 'library:area_record' %}"><i class="fa fa-plus-circle"></i> Áreas</a></li>
         </ul>
-        
+    {% if user.is_staff %}
+        <a href="{% url 'account:user_record' %}">
+                <button class="md:inline hidden bg-white text-neutral-900 hover:bg-gray-50 border border-gray-300 ml-20 px-9 py-2 rounded-full active:scale-95 transition-all">
+                Administrar usuarios
+                </button>
+                </a>
+    {% endif %}
+
     <a href="{% url 'account:logout' %}">
         <button class="md:inline hidden bg-white text-neutral-900 hover:bg-gray-50 border border-gray-300 ml-20 px-9 py-2 rounded-full active:scale-95 transition-all">
         Cerrar sesión
