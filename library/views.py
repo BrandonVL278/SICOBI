@@ -1,16 +1,20 @@
 from urllib import request
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 
 from library.models import Book, Movie, Multimedia, Equipment, Area, SubArea, Author
 from library.forms import BookForm, MovieForm, MultimediaForm, EquipmentForm, AreaForm, SubAreaForm, AuthorForm
 # Index
+@login_required
 def index(request):
     return render(request, 'index.html')
 # Book
+@login_required
+
 def book_record(request):
 	books = Book.objects.all()
 	return render(request, 'book/record.html', {'books': books})
-
+@login_required
 def book_form(request, id=None):
 	areas = Area.objects.all()
 
@@ -35,6 +39,7 @@ def load_subareas(request):
 	subareas = SubArea.objects.filter(area_id=area_id).order_by('name')
 	return render(request, 'book/subarea_dropdown_list_options.html', {'subareas': subareas})
 
+@login_required
 def author_form(request, id=None):
 	if id:
 		author = get_object_or_404(Author, id=id)
@@ -53,10 +58,12 @@ def author_form(request, id=None):
 
 
 # Movie
+@login_required
 def movies_record(request):
 	movies = Movie.objects.all()
 	return render(request, 'movie/record.html', {'movies': movies})
 
+@login_required
 def movie_form(request, id=None):
 	areas = Area.objects.all()
 
@@ -77,11 +84,12 @@ def movie_form(request, id=None):
 	})
 
 # Media
+@login_required
 def multimedia_record(request):
 	multimedias = Movie.objects.all()
 	return render(request, 'multimedia/record.html', {'multimedias': multimedias})
 
-
+@login_required
 def multimedia_form(request, id=None):
 	areas = Area.objects.all()
 
@@ -101,10 +109,12 @@ def multimedia_form(request, id=None):
 		'areas': areas,        
 	})
 # Equipment
+@login_required
 def equipment_record(request):
 	equipments = Equipment.objects.all()
 	return render(request, 'equipment/record.html', {'equipment':equipments})
 
+@login_required
 def equipment_form(request, id=None):
 	areas = Area.objects.all()
 
@@ -125,11 +135,12 @@ def equipment_form(request, id=None):
 	})
 
 # Area
-
+@login_required
 def area_record(request):
 	areas = Area.objects.all()
 	return render(request, 'area/record.html', {'areas':areas})
 
+@login_required
 def area_form(request, id=None):
 	if id:
 		area = get_object_or_404(Area, id=id)
@@ -146,6 +157,7 @@ def area_form(request, id=None):
 		'form':form
 	})
 
+@login_required
 def area_consult(request, id):
 	area = get_object_or_404(Area, id=id)
 	subareas = SubArea.objects.filter(area=area)
@@ -154,6 +166,7 @@ def area_consult(request, id):
 		'subareas':subareas,
 	})
 
+@login_required
 def subarea_form(request, area_id, id=None):
     area = get_object_or_404(Area, id=area_id)
 

@@ -28,4 +28,4 @@ def sign_in(request):
 
 def sign_out(request):
 	logout(request)
-	return redirect('master:index')
+	return redirect('account:sign_in')
