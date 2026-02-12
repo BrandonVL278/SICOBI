@@ -1,8 +1,9 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import User
 from django.contrib.auth.decorators import login_required
+from .forms import CreateUserForm
 
 
 def sign_in(request):
@@ -41,3 +42,21 @@ def user_profile(request):
 def user_record(request):
     user = User.objects.all()
     return render(request, 'user/record.html', {'user': user})
+
+@login_required
+def user_form(request, id=None):
+    if id:
+        user = get_object_or_404(User, id=id)
+        form = CreateUserForm(request.POST or None, instance=user)
+    else:
+        form = CreateUserForm(request.POST or None)
+        
+    if request.method == 'POST' and form.is_valid():
+        user_obj = form.save(commit=False)
+        user_obj.set_password(form.cleaned_data['password'])
+        user_obj.save()
+        return redirect('account:user_record')
+    
+    return render(request,'user/form.html', {
+		'form': form,       
+	})

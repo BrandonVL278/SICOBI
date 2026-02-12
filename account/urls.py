@@ -11,4 +11,6 @@ urlpatterns = [
 
      # user
      path('users/', views.user_record, name='user_record'),
+     path('users/create/', views.user_form, name='user_create'),
+     path('users/<int:id>/update/', views.user_form, name='user_update'),
 ]
